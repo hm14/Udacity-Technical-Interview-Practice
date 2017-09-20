@@ -131,3 +131,77 @@ def question4(T, r, n1, n2):
 # Given nodes have a parent child relationship
 # Given nodes are on same side of BST
 # Given nodes are on different sides of BST
+
+##############
+# QUESTION 5 #
+##############
+
+# My understanding of the questions:
+# Given first node of a linkedlist, return the element at a backwards index
+# For instance: for 3 return the 3rd last element in list
+# If linkedlist is empty then return None
+# If given number is outside range return None
+
+# efficiency O(n)
+
+# Why I approached the question this way:
+# counting the number of nodes in list will take O(n) which is decent time for lookup
+# I was limited by the definition of nodes in the linkedlist
+# if I could change the definition I will change it to allow for a doubly linkedlist
+# That will allow for faster lookup
+
+# class for elements of the linkedlist
+class Node(object):
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+# counts number of nodes in linked list
+def get_count(node):
+	if self.head:
+		count = 1
+		current = self.head
+		# iterate through all nodes in list
+		while current.next:
+			current = current.next
+			count += 1
+		return count
+	# return 0 if list is empty
+	return 0
+
+def question5(ll, m):
+	# check if node exists
+	if ll:
+		# count will keep track of number of nodes in linkedlist
+		count = 1
+		current = ll
+		# iterate through linkedlist as long as there is a next node
+		while current.next:
+			current = current.next
+			# increment count for each node
+			count += 1
+
+		# use count and m to find index of mth node
+		index = count - m
+
+		if index < 0:
+			# return None if given mth node does not exist
+			return None
+
+		else:
+			current = ll
+			# iterate through nodes till reaching mth node
+			while index > 0:
+				current = current.next
+				# decrease index by 1 for each node
+				index -= 1
+
+			# return mth node
+			return current
+	# return None if given node does not exist
+	return None
+
+# test cases
+# empty linkedlist
+# linkedlist with elements an index out of range
+# linkedlist with elements with an index within range
