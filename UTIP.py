@@ -43,35 +43,53 @@ def question1(s, t):
 # 3) If string contains no palindrome then return first character in string
 
 # Why I approached the question this way:
-# I tried a number of approaches here to avoid nested loops
-# but I was unable to find one that works for all inputs and takes less time
-# I reversed the string because a palindrome will appear the same in both priginal and reversed string
-# this makes it easier to identify palindromes in given string
+# This approach breaks down the longest palindrome problem into two sepaarte problems
+# First find all possible substrings of a string
+# Then check if a substring is a palindrome
 
-# efficiency will be O(n*n*n)
+# efficiency will be O(n*n)
 
-def question2(a):
-	# reverse string a
-	reversed_a = a[::-1]
+# returns all possible substrings of a string
+def getSubStrings(a):
+    length = len(a)
+    sub_strings = []
+    # iterates through given string
+    for i in range(length):
+    	sub_string = ''
+    	# iterates through given string from both sides
+    	# to identify all possible substrings
+    	# between first and last character
+        for j in range(i + 1, length + 1):
+            sub_string = a[i:j]
+            # appends each substring to substrings array
+            sub_strings.append(sub_string)
+    # returns all substrings of a string
+    return sub_strings
+
+# checks if a string is a palindrome
+def isPalindrome(a):
+	# checks if a string is the same as teh reverse of that string
+	if a == a[::-1]:
+		# returns True if string equals reverse string
+		return True
+	# else returns False
+	return False
+
+# returns longest palindrome in a string
+def getLongestPalindrome(a):
 	longest_palindrome = ''
-
-	# iterate through string a
-	for i in range(0, len(a)):
-		for j in range(0, len(a)):
-			temp = 0 
-			palindrome = ''
-			# as long as such of loop index and temp are less than string length
-			# and characters at indexes are same
-			# concatenate character at index to palindrome
-			# and increment temp
-			while(i+temp < len(a) and j+temp < len(reversed_a) and a[i+temp] == reversed_a[j+temp]):
-				palindrome += a[i+temp]
-				temp += 1
-			# compare length of longest_palindrome and palindrome
-			# replace longest_palindrome with palindrome if palindrome's length is greater
-			# this helps find longest palindrome from all palindromes in string
-			if(len(longest_palindrome) < len(palindrome)):
-				longest_palindrome = palindrome
+	# if given string is shorter than 2 characters, returns string
+	if len(a) < 2:
+		return a
+	else:
+		# iterates through all substrings of the given string
+		for i in getSubStrings(a):
+			# checks if a substring is a palindrome
+			# checks for the longest palindrome by comparing len of palindrome substrings
+			if isPalindrome(i) and len(i) > len(longest_palindrome):
+				# saves a substring palindrome as longest palindrome based on length of substring
+				longest_palindrome = i
+	# returns longest palindrome
 	return longest_palindrome
 
 # test cases
