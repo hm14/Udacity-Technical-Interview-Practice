@@ -5,7 +5,7 @@
 # My understanding of the question: 
 # 1) If t contains only the letters from s return True
 # 2) Letters from s can appear in t only as many times as they do in s
-# 3) Empty strings are no considered anagrams
+# 3) Empty strings are not considered anagrams
 
 # Why I approached the question this way:
 # no nested for loops that take extra time
@@ -76,7 +76,7 @@ def isPalindrome(a):
 	return False
 
 # returns longest palindrome in a string
-def getLongestPalindrome(a):
+def question2(a):
 	longest_palindrome = ''
 	# if given string is shorter than 2 characters, returns string
 	if len(a) < 2:
@@ -99,6 +99,10 @@ def getLongestPalindrome(a):
 # string has multipl palindromes i.e. 'annalevels'
 
 ##############
+# QUESTION 3 #
+##############
+
+##############
 # QUESTION 4 #
 ##############
 
@@ -113,6 +117,8 @@ def getLongestPalindrome(a):
 # I wanted to avoid nested loops leading to greater time
 # Simple solution run recursively
 # Build upon the fact that BST is sorted
+
+# efficiency O(n)
 
 def question4(T, r, n1, n2):
     print ' '
@@ -160,13 +166,13 @@ def question4(T, r, n1, n2):
 # If linkedlist is empty then return None
 # If given number is outside range return None
 
-# efficiency O(n)
-
 # Why I approached the question this way:
 # counting the number of nodes in list will take O(n) which is decent time for lookup
 # I was limited by the definition of nodes in the linkedlist
 # if I could change the definition I will change it to allow for a doubly linkedlist
 # That will allow for faster lookup
+
+# efficiency O(n)
 
 # class for elements of the linkedlist
 class Node(object):
