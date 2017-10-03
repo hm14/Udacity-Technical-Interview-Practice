@@ -29,9 +29,25 @@ def question1(s, t):
 
 # test cases
 # empty strings
+# non-strings i.e. numbers
+# very long strings
 # repetition of letter in string i.e. 'a' in 'anagram'
-# string without anagram
-# string with anagram
+# strings without anagram
+# strings with anagram
+
+def test1():
+	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+	print "Test cases for question1"
+	print "Edge 1: question1(, ):", "Pass" if False == question1('','') else "Fail"
+	print "Edge 2: question1(0, 0):", "Pass" if False == question1(0,0) else "Fail"
+	longInput1 = 'dghwkedhkewhduew hdew doewi hegfiue gfiuew gfiuew fge wf we few iugfewgfjhwgefjw'
+	longInput2 = 'dgfjdhsgfshdfkwe wuehfkw efuwf wufw'
+	print "Edge 3: (" + longInput1 + ', ' + longInput2 + "):" , "Pass" if False == question1(longInput1,longInput2) else "Fail"
+	print "Example 1: question1(hello, el):", "Pass" if True == question1("hello", "el") else "Fail"
+	print "Example 2: question1(hello, hello):", "Pass" if True == question1("hello", "hello") else "Fail"
+	print "Example 3: question1(hello, hellos):", "Pass" if False == question1("hello", "hellos") else "Fail"
+
+test1()
 
 ##############
 # QUESTION 2 #
@@ -93,10 +109,28 @@ def question2(a):
 	return longest_palindrome
 
 # test cases
+# empty string
+# single character string
+# long string
 # string without any palindromes i.e. 'abcde'
 # entire string is palindrome i.e. 'alevela'
 # string has only one palindrome i.e. 'banana'
 # string has multipl palindromes i.e. 'annalevels'
+
+def test2():
+	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+	print "Test cases for question2"
+	print "Edge 1: question2():", "Pass" if '' == question2('') else "Fail"
+	print "Edge 2: question2(a):", "Pass" if 'a' == question2('a') else "Fail"
+	longInput1 = 'dghwkedhkewhdueweud hdew doewi hegfiue gfiuew gfiuew fge wf we few iugfewgfjhwgefjw'
+	print "Edge 3: question2(" + longInput1 + "):" , "Pass" if 'dueweud' == question2(longInput1) else "Fail"
+	print "Example 1: question2(abcde):", "Pass" if 'a' == question2('abcde') else "Fail"
+	print "Example 2: question2(alevela):", "Pass" if 'alevela' == question2('alevela') else "Fail"
+	print "Example 3: question2(banana):", "Pass" if 'anana' == question2('banana') else "Fail"
+	print "Example 4: question2(annalevels):", "Pass" if 'level' == question2('annalevels') else "Fail"
+
+
+test2()
 
 ##############
 # QUESTION 3 #
@@ -155,6 +189,11 @@ def question4(T, r, n1, n2):
 # Given nodes have a parent child relationship
 # Given nodes are on same side of BST
 # Given nodes are on different sides of BST
+
+def test4():
+	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+
+test4()
 
 ##############
 # QUESTION 5 #
@@ -227,5 +266,20 @@ def question5(ll, m):
 
 # test cases
 # empty linkedlist
-# linkedlist with elements an index out of range
-# linkedlist with elements with an index within range
+# node of a linkedlist with elements and an index out of range
+# node of a linkedlist with elements with an index within range
+
+class Node(object):
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+def test5():
+	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+	print "Test cases for question5"
+	node = 0
+	print "Edge 1: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
+	print "Edge 2: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
+	print "Example 1: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
+
+test5()
