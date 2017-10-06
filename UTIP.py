@@ -42,7 +42,7 @@ def test1():
 	print "Edge 2: question1(0, 0):", "Pass" if False == question1(0,0) else "Fail"
 	longInput1 = 'dghwkedhkewhduew hdew doewi hegfiue gfiuew gfiuew fge wf we few iugfewgfjhwgefjw'
 	longInput2 = 'dgfjdhsgfshdfkwe wuehfkw efuwf wufw'
-	print "Edge 3: (" + longInput1 + ', ' + longInput2 + "):" , "Pass" if False == question1(longInput1,longInput2) else "Fail"
+	print "Edge 3: (very long string):" , "Pass" if False == question1(longInput1,longInput2) else "Fail"
 	print "Example 1: question1(hello, el):", "Pass" if True == question1("hello", "el") else "Fail"
 	print "Example 2: question1(hello, hello):", "Pass" if True == question1("hello", "hello") else "Fail"
 	print "Example 3: question1(hello, hellos):", "Pass" if False == question1("hello", "hellos") else "Fail"
@@ -123,7 +123,7 @@ def test2():
 	print "Edge 1: question2():", "Pass" if '' == question2('') else "Fail"
 	print "Edge 2: question2(a):", "Pass" if 'a' == question2('a') else "Fail"
 	longInput1 = 'dghwkedhkewhdueweud hdew doewi hegfiue gfiuew gfiuew fge wf we few iugfewgfjhwgefjw'
-	print "Edge 3: question2(" + longInput1 + "):" , "Pass" if 'dueweud' == question2(longInput1) else "Fail"
+	print "Edge 3: question2(very long string):" , "Pass" if 'dueweud' == question2(longInput1) else "Fail"
 	print "Example 1: question2(abcde):", "Pass" if 'a' == question2('abcde') else "Fail"
 	print "Example 2: question2(alevela):", "Pass" if 'alevela' == question2('alevela') else "Fail"
 	print "Example 3: question2(banana):", "Pass" if 'anana' == question2('banana') else "Fail"
@@ -271,32 +271,31 @@ test3()
 # efficiency O(n)
 
 def question4(T, r, n1, n2):
-    print ' '
-    # check if n1 and n2 are on different sides of the root
+    # checks if n1 and n2 are on different sides of the root
     if (n1 > r and n2 < r) or (n1 < r and n2 > r):
-        # return root if n1 and n2 are on different sides
+        # returns root if n1 and n2 are on different sides
         # because in this case the root is the only common ancestor
         return r
-    # check if both n1 and n2 are smaller than root
+    # checks if both n1 and n2 are smaller than root
     elif (n1 < r and n2 < r):
         left = T[r].index(1)
-        # check if n1 or n2 equals left child of root
+        # checks if n1 or n2 equals left child of root
         if n1 == left or n2 == left:
             return r
-        # change root to left child
+        # changes root to left child
         else:
             r = left
-    # check if both n1 and n2 are greater than root
+    # checks if both n1 and n2 are greater than root
     elif (n1 > r and n2 > r):
         right = len(T[r]) - T[r][::-1].index(1) - 1
-        # check if n1 or n2 equals right child of root
+        # checks if n1 or n2 equals right child of root
         if n1 == right or n2 == right:
             return r
         else:
-            # change root to right child
+            # changes root to right child
             r = right
             
-    # run recursively with updated root
+    # runs recursively with updated root
     return question4(T, r, n1, n2)
 
 # test cases
@@ -307,7 +306,37 @@ def question4(T, r, n1, n2):
 # Given nodes are on different sides of BST
 
 def test4():
+	inputs = [[[0, 1, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [1, 0, 0, 0, 1],
+           [0, 0, 0, 0, 0]],
+           [[0, 0, 0, 0, 0, 0, 0],
+           [1, 0, 1, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0],
+           [0, 1, 0, 0, 1, 0, 0],
+           [0, 0, 0, 0, 0, 0, 1]],
+           [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+	]
 	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+	print "Test cases for question4"
+	print "Edge 1: question4():", "Pass" if 3 == question4(inputs[0], 3, 0, 4) else "Fail"
+	print "Edge 2: question4():", "Pass" if 3 == question4(inputs[1], 3, 2, 6) else "Fail"
+	print "Example 1: question4():", "Pass" if 1 == question4(inputs[1], 3, 0, 2) else "Fail"
+	print "Example 2: question4():", "Pass" if 3 == question4(inputs[0], 3, 1, 4) else "Fail"
+	print "Example 3: question4():", "Pass" if 3 == question4(inputs[2], 6, 1, 4) else "Fail"
+
 
 test4()
 
@@ -409,7 +438,7 @@ def test5():
 	node3.next = node4
 	node4.next = node5
 	node5.next = node6
-	
+
 	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 	print "Test cases for question5"
 	print "Edge 1: question5(node, 5):", "Pass" if 0 == question5(node, 1).data else "Fail"
