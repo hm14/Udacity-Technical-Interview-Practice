@@ -212,14 +212,16 @@ def unionOf(edge, parent):
 	return True
 
 # test cases
-# graph is a minimum spanning tree
 # graph with no vertices
-# graph with only two vertices
+# graph is a minimum spanning tree
+# graph with only two vertices 
 # graph with one cycle
-# graph with multiple cycles 
+# graph with multiple cycles
+
 
 def test3():
-	graphs = [{'A': [('B', 2), ('C', 0)],
+	graphs = [{},
+	{'A': [('B', 2), ('C', 0)],
 	 'B': [('A', 2), ('C', 1)], 
 	 'C': [('B', 1), ('A', 0)]},
 	 {'A': [('B', 2), ('C', 0)],
@@ -230,12 +232,23 @@ def test3():
 	 'C': [('B', 15), ('A', 5), ('D', 4)],
 	 'D': [('C', 4), ('A', 6)]},
 	 {'A': [('B', 10)],
-	 'B': [('A', 10)]}
+	 'B': [('A', 10)]},
+	]
+
+	outputs = [{},
+	{'A': [('C', 0)], 'C': [('A', 0), ('B', 1)], 'B': [('C', 1)]},
+	{'A': [('C', 0)], 'C': [('A', 0), ('B', 1)], 'B': [('C', 1)]},
+	{'A': [('C', 5), ('B', 10)], 'C': [('D', 4), ('A', 5)], 'B': [('A', 10)], 'D': [('C', 4)]},
+	{'A': [('B', 10)], 'B': [('A', 10)]},
 	]
 
 	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 	print "Test cases for question3"
-
+	print "Edge 1: question3():", "Pass" if outputs[0] == question3(graphs[0]) else "Fail"
+	print "Edge 2: question3():", "Pass" if outputs[1] == question3(graphs[1]) else "Fail"
+	print "Example 3: question3():", "Pass" if outputs[2] == question3(graphs[2]) else "Fail"
+	print "Example 1: question3():", "Pass" if outputs[3] == question3(graphs[3]) else "Fail"
+	print "Example 2: question3():", "Pass" if outputs[4] == question3(graphs[4]) else "Fail"
 
 test3()
 
@@ -341,6 +354,11 @@ def question5(ll, m):
 		# count will keep track of number of nodes in linkedlist
 		count = 1
 		current = ll
+
+		# checks if ll is the only node in a linkedlist
+		if not current.next and m == 1:
+			return current
+
 		# iterate through linkedlist as long as there is a next node
 		while current.next:
 			current = current.next
@@ -368,7 +386,7 @@ def question5(ll, m):
 	return None
 
 # test cases
-# empty linkedlist
+# node of a linkedlist with only one node
 # node of a linkedlist with elements and an index out of range
 # node of a linkedlist with elements with an index within range
 
@@ -378,11 +396,25 @@ class Node(object):
     self.next = None
 
 def test5():
+	node = Node(0)
+	node1 = Node(1)
+	node2 = Node(2)
+	node3 = Node(3)
+	node4 = Node(4)
+	node5 = Node(5)
+	node6 = Node(6)
+
+	node1.next = node2
+	node2.next = node3
+	node3.next = node4
+	node4.next = node5
+	node5.next = node6
+	
 	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 	print "Test cases for question5"
-	node = 0
-	print "Edge 1: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
-	print "Edge 2: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
-	print "Example 1: question5(node, 5):", "Pass" if None == question5(node, 5) else "Fail"
+	print "Edge 1: question5(node, 5):", "Pass" if 0 == question5(node, 1).data else "Fail"
+	print "Edge 2: question5(node, 5):", "Pass" if None == question5(node1, 15) else "Fail"
+	print "Example 1: question5(node, 5):", "Pass" if 2 == question5(node1, 5).data else "Fail"
+	print "Example 2: question5(node, 1):", "Pass" if None == question5(node, 15) else "Fail"
 
 test5()
