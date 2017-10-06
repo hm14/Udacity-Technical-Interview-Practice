@@ -136,6 +136,109 @@ test2()
 # QUESTION 3 #
 ##############
 
+# My understanding of the question:
+# Find the minimum spanning tree from an undirected graph based on the weight of the edges between vertices
+# Minimum spanning tree includes only the edges with the minimum weights from one vertex to another
+# Minimum spanning tree must not have any cycles
+# Input is a graph represented as a dictionary
+
+# Why I approached the question this way:
+# Iterate through dictionary to read and save all edges
+# Sort edges by weight 
+# Check if a path with lesser weight is possible
+# Check if edge exists in minimum spanning tree
+
+# efficieny O(n*n)
+
+import math
+
+def question3(G):
+
+	parent = dict()
+
+	# checks if input is a dictionary
+	if type(G) == dict:
+		# initializes edges as an empty set
+		edges = list()
+
+		for v in G:
+			parent[v] = v
+			for edge in G[v]:
+				# will create a tuple (A, B, 2) for 'A': [('B', 2)]
+				edges.append((v, edge[0], edge[1]))
+
+		# all the edges in edges are sorted based on the weights
+		edges.sort(key = lambda tup: tup[2])
+		
+		mst = dict()
+
+		used_edges = set()
+
+		for edge in edges:
+			# checks if an edge has already been checked
+			if edge not in used_edges:
+				used_edges.add((edge[0], edge[1]))
+				used_edges.add((edge[1], edge[0]))
+				# checks for acceptable edges and appends to list
+				if unionOf(edge, parent):
+					if edge[0] not in mst:
+					    mst[edge[0]] = []
+					mst[edge[0]].append((edge[1], edge[2]))
+					if edge[1] not in mst:
+					    mst[edge[1]] = []
+					mst[edge[1]].append((edge[0], edge[2]))
+
+		return mst
+
+	else:
+		return None
+
+# returns parent of given node if node is already in tree 
+def findParent(node, parent):
+	if parent[node] != node:
+		parent[node] = findParent(parent[node], parent)
+	return parent[node]
+
+# checks if an edge results in a cycle
+def unionOf(edge, parent):
+	parent_a = findParent(edge[0], parent)
+	parent_b = findParent(edge[1], parent)
+	# checks for a cycle
+	if parent_a == parent_b:
+		return False
+	# makes a and b have the same parent
+	parent[parent_a] = parent_b
+
+	return True
+
+# test cases
+# graph is a minimum spanning tree
+# graph with no vertices
+# graph with only two vertices
+# graph with one cycle
+# graph with multiple cycles 
+
+def test3():
+	graphs = [{'A': [('B', 2), ('C', 0)],
+	 'B': [('A', 2), ('C', 1)], 
+	 'C': [('B', 1), ('A', 0)]},
+	 {'A': [('B', 2), ('C', 0)],
+	 'B': [('A', 2), ('C', 1)], 
+	 'C': [('B', 1), ('A', 0)]},
+	 {'A': [('B', 10), ('C', 5), ('D', 6)],
+	 'B': [('A', 10), ('C', 15)], 
+	 'C': [('B', 15), ('A', 5), ('D', 4)],
+	 'D': [('C', 4), ('A', 6)]},
+	 {'A': [('B', 10)],
+	 'B': [('A', 10)]}
+	]
+
+	print "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+	print "Test cases for question3"
+
+
+test3()
+
 ##############
 # QUESTION 4 #
 ##############
